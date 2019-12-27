@@ -1,0 +1,27 @@
+Resources:
+  VPCEC2Te:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+      - Key: Name
+        Value: VPC-EC2T2Micro
+
+  PublicSubnet1:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPCEC2Te
+      AvailabilityZone: !Select [ 0, !GetAZs '']
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key : Name
+          Value: PublicSubnet 1
+  PrivateSubnet1:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPCEC2Te
+      AvailabilityZone: !Select [ 1, !GetAZs '']
+      CidrBlock: 10.0.2.0/24
+      Tags:
+        - Key : Name
+          Value: Private Subnet 1
