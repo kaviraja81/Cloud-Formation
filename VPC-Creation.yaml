@@ -25,3 +25,18 @@ Resources:
       Tags:
         - Key : Name
           Value: Private Subnet 1
+  #Creating an Internet Gateway and attaching the I/G to VPC created
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    DependsOn: VPCEC2Te
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    # Notice how you can't attach an IGW to a VPC unless both are created:
+    Properties:
+      VpcId: !Ref VPCEC2Te
+      InternetGatewayId: !Ref InternetGateway
+Outputs:
+  VPCName :
+    Value: !Ref VPCEC2Te
+  PublicSubnet :
+    Value: !Ref PublicSubnet1 
